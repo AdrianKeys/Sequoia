@@ -20,6 +20,7 @@ import datetime
 def prepare():
     logging.info("************************ process start ***************************************")
     all_data = ak.stock_zh_a_spot_em()
+    
     subset = all_data[['代码', '名称']]
     stocks = [tuple(x) for x in subset.values]
     statistics(all_data, stocks)
@@ -47,6 +48,7 @@ def prepare():
 def process(stocks, strategies):
     stocks_data = data_fetcher.run(stocks)
     for strategy, strategy_func in strategies.items():
+        print(f"processing strategy {strategy}\n")
         check(stocks_data, strategy, strategy_func)
         time.sleep(2)
 
@@ -79,6 +81,7 @@ def statistics(all_data, stocks):
     down5 = len(all_data.loc[(all_data['涨跌幅'] <= -5)])
 
     msg = "涨停数：{}   跌停数：{}\n涨幅大于5%数：{}  跌幅大于5%数：{}".format(limitup, limitdown, up5, down5)
+    print(msg)
     push.statistics(msg)
 
 

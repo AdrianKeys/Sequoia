@@ -9,6 +9,7 @@ import concurrent.futures
 
 def fetch(code_name):
     stock = code_name[0]
+    print(f"fetching {code_name}")
     data = ak.stock_zh_a_hist(symbol=stock, period="daily", start_date="20220101", adjust="qfq")
 
     if data is None or data.empty:
