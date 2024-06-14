@@ -63,10 +63,11 @@ def check(stocks_data, strategy, strategy_func):
 def check_enter(end_date=None, strategy_fun=enter.check_volume):
     def end_date_filter(stock_data):
         if end_date is not None:
-            if end_date < stock_data[1].iloc[0].日期:  # 该股票在end_date时还未上市
-                logging.debug("{}在{}时还未上市".format(stock_data[0], end_date))
+            end_date1 = datetime.datetime.strptime(end_date,"%Y-%m-%d").date()
+            if end_date1 < stock_data[1].iloc[0].日期:  # 该股票在end_date时还未上市
+                logging.debug("{}在{}时还未上市".format(stock_data[0], end_date1))
                 return False
-        return strategy_fun(stock_data[0], stock_data[1], end_date=end_date)
+        return strategy_fun(stock_data[0], stock_data[1], end_date=end_date1)
 
 
     return end_date_filter
