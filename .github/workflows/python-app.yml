@@ -40,4 +40,4 @@ jobs:
       with:
         name: sequoia
         path: |
-              logs/sequoia-＊.log
+              sequoia＊.log
