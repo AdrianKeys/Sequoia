@@ -67,6 +67,8 @@ def check_enter(end_date=None, strategy_fun=enter.check_volume):
             if end_date1 < stock_data[1].iloc[0].日期:  # 该股票在end_date时还未上市
                 logging.debug("{}在{}时还未上市".format(stock_data[0], end_date1))
                 return False
+        else:
+            end_date1 = end_date
         return strategy_fun(stock_data[0], stock_data[1], end_date=end_date1)
 
 
